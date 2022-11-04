@@ -1,23 +1,13 @@
-import { httpClient } from "../http/httpClient";
-import { redisClient } from "../cache/redisClient";
+import { httpClient } from 'core/http/httpClient';
+import { cacheClient } from 'core/cache/cacheClient';
 
-export const getAllBreeds = async () => {
-  const cacheKey = "/dogs";
-  const cachedValue = await redisClient.get(cacheKey);
+export const getAllBreeds = async (cacheKey: string) => {
+    const breeds = await httpClient
+        .get('https://dog.ceo/api/breeds/list/all')
+        .then((httpResponse) => httpResponse.data);
 
-  if (cachedValue) {
-    console.log("cache HIT");
-    return JSON.parse(cachedValue);
-  }
+    console.log('cache MISS');
+    await cacheClient.set(cacheKey, breeds);
 
-  const breeds = await httpClient
-    .get("https://dog.ceo/api/breeds/list/all")
-    .then((httpResponse) => httpResponse.data);
-
-  console.log("cache MISS");
-  await redisClient.set(cacheKey, JSON.stringify(breeds), {
-    EX: 5,
-  });
-
-  return breeds;
+    return breeds;
 };

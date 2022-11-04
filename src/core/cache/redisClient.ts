@@ -1,7 +1,7 @@
-import { createClient } from "redis";
+import { createClient } from 'redis';
 
 export const redisClient = createClient({
-  url: "redis://localhost:6377",
+    url: 'redis://localhost:6377',
 });
 
-redisClient.on("error", (err) => console.log("Redis Client Error", err));
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
