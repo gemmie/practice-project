@@ -1,5 +1,4 @@
 import { redisClient } from 'core/cache/redisClient';
-import { Request, Response, NextFunction } from 'express';
 
 const set = async (key: string, value: any, ttlSeconds = 5) => {
     await redisClient.set(key, JSON.stringify(value), {
@@ -7,7 +6,7 @@ const set = async (key: string, value: any, ttlSeconds = 5) => {
     });
 };
 
-const get = async (key: string) => {
+const get = async <T>(key: string): Promise<T> => {
     const cachedValue = await redisClient.get(key);
 
     return cachedValue && JSON.parse(cachedValue);

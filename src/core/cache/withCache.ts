@@ -1,11 +1,11 @@
 import { cacheClient } from 'core/cache/cacheClient';
 
-export const withCache = async (
+export const withCache = async <T>(
     key: string,
-    getValue: () => Promise<any>,
+    getValue: () => Promise<T>,
     ttlSeconds: number
 ) => {
-    const cachedValue = await cacheClient.get(key);
+    const cachedValue = await cacheClient.get<T>(key);
 
     if (cachedValue) {
         console.log('hit');
