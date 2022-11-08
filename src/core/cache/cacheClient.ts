@@ -1,27 +1,9 @@
 import { redisClient } from 'core/cache/redisClient';
 import { Request, Response, NextFunction } from 'express';
 
-export const getDataFromCache = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    const cacheKey = req.url;
-
-    const cachedValue = await get(cacheKey);
-
-    if (cachedValue) {
-        console.log('cache HIT');
-        res.send(cachedValue);
-        return;
-    }
-
-    next();
-};
-
-const set = async (key: string, value: any) => {
+const set = async (key: string, value: any, ttlSeconds = 5) => {
     await redisClient.set(key, JSON.stringify(value), {
-        EX: 5,
+        EX: ttlSeconds,
     });
 };
 
