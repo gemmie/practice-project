@@ -12,7 +12,12 @@ const get = async <T>(key: string): Promise<T> => {
     return cachedValue && JSON.parse(cachedValue);
 };
 
+const del = async (key: string): Promise<void> => {
+    await redisClient.del(key);
+};
+
 export const cacheClient: CacheClient = {
     get,
     set,
+    del,
 };

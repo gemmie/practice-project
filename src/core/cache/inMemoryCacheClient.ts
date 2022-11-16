@@ -14,4 +14,5 @@ export const inMemoryCacheClient: CacheClient = {
                 ? inMemoryCache.set(key, value, ttlSeconds)
                 : inMemoryCache.set(key, value)
         ),
+    del: (key: string) => Promise.resolve(inMemoryCache.del(key)),
 };

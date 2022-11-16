@@ -24,7 +24,13 @@ const get = async <T>(key: string) => {
     return cachedValue;
 };
 
+const del = async (key: string) => {
+    await cacheClient.del(key);
+    await inMemoryCacheClient.del(key);
+};
+
 export const combinedCacheClient: CacheClient = {
     get,
     set,
+    del,
 };
