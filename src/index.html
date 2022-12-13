@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <script type="text/javascript" src='https://unpkg.com/mqtt/dist/mqtt.min.js' ></script>
+    <title>test site</title>
+    <script type="text/javascript">
+        const client = mqtt.connect('ws://localhost:9001');
+        console.log(client)
+        client.subscribe('topic1');
+        client.on('connect', () => {
+            console.log('connected')
+        });
+        client.on("message", function (topic, payload) {
+            console.log([topic, payload].join(": "))
+        })
+
+    </script>
+</head>
+<body>
+XD
+</body>
+</html>

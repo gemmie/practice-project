@@ -4,3 +4,9 @@ services:
     image: redis
     ports:
       - 6377:6379
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+
