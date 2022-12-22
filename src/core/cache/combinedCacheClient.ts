@@ -1,6 +1,6 @@
 import { CacheClient } from 'core/cache/types';
-import { inMemoryCacheClient } from 'core/cache/inMemoryCacheClient';
-import { cacheClient } from 'core/cache/cacheClient';
+import { inMemoryCacheClient } from './inMemoryCacheClient';
+import { cacheClient } from './cacheClient';
 
 const set = async (key: string, value: any, ttlSeconds?: number) => {
     await inMemoryCacheClient.set(key, value);
