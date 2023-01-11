@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /dogs should cache api response 1`] = `"{"message":{"dachshund":[]},"status":"success"}"`;
+
+exports[`GET /dogs should cache api response 2`] = `
+{
+  "message": {
+    "dachshund": [],
+  },
+  "status": "success",
+}
+`;
+
+exports[`GET /dogs should return dog list 1`] = `
+{
+  "message": {
+    "dachshund": [],
+  },
+  "status": "success",
+}
+`;

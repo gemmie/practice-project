@@ -21,6 +21,10 @@ export class MqttClient {
         console.log('mqtt client connected');
     }
 
+    public async disconnect(): Promise<void> {
+        this.client?.end();
+    }
+
     public async subscribe(topic: string, messageHandler: MessageHandler) {
         this.client
             ?.subscribe([topic])

@@ -4,23 +4,27 @@ import {
     ReceiveMessageCommand,
     DeleteMessageCommand,
 } from '@aws-sdk/client-sqs';
-import * as dotenv from 'dotenv';
+import config from 'config';
 import { InvalidateCacheMessage, QMessageHandler } from 'core/queue/types';
-dotenv.config();
 
-const QUEUE_URL = process.env.QUEUE_URL || '';
+const sqsConfig = config.get('sqs') as {
+    queueUrl: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+    region: string;
+};
 
 const client = new SQSClient({
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+        accessKeyId: sqsConfig.accessKeyId,
+        secretAccessKey: sqsConfig.secretAccessKey,
     },
-    region: 'eu-central-1',
+    region: sqsConfig.region,
 });
 
 export const sendMsg = async (message: InvalidateCacheMessage) => {
     const sendMessageCommand = new SendMessageCommand({
-        QueueUrl: QUEUE_URL,
+        QueueUrl: sqsConfig.queueUrl,
         MessageBody: JSON.stringify(message),
     });
     const response = await client.send(sendMessageCommand);
@@ -29,7 +33,7 @@ export const sendMsg = async (message: InvalidateCacheMessage) => {
 
 export const receiveMsg = async ({ handleMessage }: QMessageHandler) => {
     const receiveMessageCommand = new ReceiveMessageCommand({
-        QueueUrl: QUEUE_URL,
+        QueueUrl: sqsConfig.queueUrl,
         MaxNumberOfMessages: 10,
     });
 
@@ -56,7 +60,7 @@ export const receiveMsg = async ({ handleMessage }: QMessageHandler) => {
 
 const deleteMsg = async (receiptHandle: any) => {
     const deleteInput = {
-        QueueUrl: QUEUE_URL,
+        QueueUrl: sqsConfig.queueUrl,
         ReceiptHandle: receiptHandle,
     };
 

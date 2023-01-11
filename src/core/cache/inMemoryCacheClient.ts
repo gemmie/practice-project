@@ -1,7 +1,7 @@
 import NodeCache from 'node-cache';
 import { CacheClient } from 'core/cache/types';
 
-const inMemoryCache = new NodeCache({
+export const inMemoryCache = new NodeCache({
     stdTTL: 2,
     checkperiod: 60,
 });
