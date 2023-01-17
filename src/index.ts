@@ -1,4 +1,4 @@
-import { createApp } from 'app';
+import { createApp } from 'src/app';
 import config from 'config';
 
 const port = config.get('port');
