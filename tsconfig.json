@@ -3,10 +3,10 @@
         "target": "es6",
         "module": "commonjs",
         "outDir": "./dist",
-        "rootDir": "./src",
+        "rootDir": ".",
         "strict": true,
         "moduleResolution": "node",
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "esModuleInterop": true
     },
     "include": ["src/**/*.ts"],

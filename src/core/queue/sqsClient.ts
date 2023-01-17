@@ -5,7 +5,7 @@ import {
     DeleteMessageCommand,
 } from '@aws-sdk/client-sqs';
 import config from 'config';
-import { InvalidateCacheMessage, QMessageHandler } from 'core/queue/types';
+import { InvalidateCacheMessage, QMessageHandler } from './types';
 
 const sqsConfig = config.get('sqs') as {
     queueUrl: string;

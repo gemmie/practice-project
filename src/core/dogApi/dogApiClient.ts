@@ -1,5 +1,5 @@
-import { httpClient, HttpResponse } from 'core/http/httpClient';
-import { cacheClient } from 'core/cache/cacheClient';
+import { httpClient, HttpResponse } from '../http/httpClient';
+import { cacheClient } from '../cache/cacheClient';
 
 export type BreedsResponse = {
     message: any;

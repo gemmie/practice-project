@@ -1,4 +1,4 @@
-import { cacheClient } from 'core/cache/cacheClient';
+import { cacheClient } from './cacheClient';
 
 export const withCache = async <T>(
     key: string,

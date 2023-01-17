@@ -1,6 +1,6 @@
-import { cacheClient } from 'core/cache/cacheClient';
-import { inMemoryCacheClient } from 'core/cache/inMemoryCacheClient';
-import { combinedCacheClient2Factory } from 'core/cache/combinedCacheClient2';
+import { cacheClient } from './cacheClient';
+import { inMemoryCacheClient } from './inMemoryCacheClient';
+import { combinedCacheClient2Factory } from './combinedCacheClient2';
 
 export const combinedCacheClient2 = combinedCacheClient2Factory(
     cacheClient,

@@ -1,6 +1,6 @@
-import { InvalidateCacheMessage } from 'core/queue/types';
-import { sendMsg } from 'core/queue/sqsClient';
-import { combinedCacheClient } from 'core/cache/combinedCacheClient';
+import { InvalidateCacheMessage } from './types';
+import { sendMsg } from './sqsClient';
+import { combinedCacheClient } from '../cache/combinedCacheClient';
 
 const getInvalidateCacheMessage = (key: string): InvalidateCacheMessage => {
     return {

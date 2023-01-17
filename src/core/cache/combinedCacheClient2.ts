@@ -1,4 +1,4 @@
-import { CacheClient } from 'core/cache/types';
+import { CacheClient } from './types';
 
 export const combinedCacheClient2Factory = (
     redisCacheClient: CacheClient,

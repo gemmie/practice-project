@@ -10,7 +10,16 @@
         client.on('connect', () => {
             console.log('connected')
         });
+
         client.on("message", function (topic, payload) {
+
+            const node = document.createTextNode(`${topic}: ${payload}`);
+            const paragraph = document.createElement('p');
+            paragraph.appendChild(node);
+
+            const body = document.querySelector('body');
+            body.appendChild(paragraph);
+
             console.log([topic, payload].join(": "))
         })
 

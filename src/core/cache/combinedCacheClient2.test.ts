@@ -1,6 +1,6 @@
 import { mock } from 'jest-mock-extended';
 import { combinedCacheClient2Factory } from './combinedCacheClient2';
-import { CacheClient } from 'core/cache/types';
+import { CacheClient } from './types';
 
 const cacheClient = mock<CacheClient>();
 const inMemoryCacheClient = mock<CacheClient>();

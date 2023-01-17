@@ -1,4 +1,4 @@
-import { combinedCacheClient } from 'core/cache/combinedCacheClient';
+import { combinedCacheClient } from './combinedCacheClient';
 
 export const withCombinedCache = async <T>(
     key: string,

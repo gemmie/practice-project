@@ -1,5 +1,5 @@
 import NodeCache from 'node-cache';
-import { CacheClient } from 'core/cache/types';
+import { CacheClient } from './types';
 
 export const inMemoryCache = new NodeCache({
     stdTTL: 2,

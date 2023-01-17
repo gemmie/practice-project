@@ -1,10 +1,10 @@
 import request from 'supertest';
-import { createApp } from '../../src/app';
+import { createApp } from 'src/app';
 import nock from 'nock';
 import { checkNockIsDone } from '../util/nock';
 import { Application } from 'express';
-import { redisClient } from '../../src/core/cache/redisClient';
-import { inMemoryCache } from '../../src/core/cache/inMemoryCacheClient';
+import { redisClient } from 'src/core/cache/redisClient';
+import { inMemoryCache } from 'src/core/cache/inMemoryCacheClient';
 
 console.log = jest.fn();
 

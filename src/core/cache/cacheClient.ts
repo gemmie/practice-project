@@ -1,5 +1,5 @@
-import { redisClient } from 'core/cache/redisClient';
-import { CacheClient } from 'core/cache/types';
+import { redisClient } from './redisClient';
+import { CacheClient } from './types';
 
 const set = async (key: string, value: any, ttlSeconds = 5) => {
     await redisClient.set(key, JSON.stringify(value), {

@@ -1,11 +1,11 @@
 import express from 'express';
-import { BreedsResponse, getAllBreeds } from 'core/dogApi/dogApiClient';
-import { withCombinedCache } from 'core/cache/withCombinedCache';
-import { sendInvalidateCacheMsg } from 'core/queue/cacheQueueHandler';
-import { mqttClient } from 'core/queue/mqttClient';
+import { BreedsResponse, getAllBreeds } from './core/dogApi/dogApiClient';
+import { withCombinedCache } from './core/cache/withCombinedCache';
+import { sendInvalidateCacheMsg } from './core/queue/cacheQueueHandler';
+import { mqttClient } from './core/queue/mqttClient';
 import bodyParser from 'body-parser';
 import path from 'path';
-import { redisClient } from 'core/cache/redisClient';
+import { redisClient } from './core/cache/redisClient';
 
 export const createApp = async () => {
     const app = express();
