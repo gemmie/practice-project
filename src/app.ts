@@ -15,7 +15,7 @@ export const createApp = async () => {
     app.use(bodyParser.json());
 
     app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, 'index.html'));
+        res.status(200).sendFile(path.join(__dirname, 'index.html'));
     });
 
     app.get('/dogs', async (req, res) => {
@@ -30,8 +30,6 @@ export const createApp = async () => {
 
     app.post('/mqtt', (req, res) => {
         const { topic, message } = req.body;
-
-        console.log(topic, message);
 
         mqttClient.publish(topic, message);
 

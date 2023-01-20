@@ -9,6 +9,14 @@
         client.subscribe('topic1');
         client.on('connect', () => {
             console.log('connected')
+
+            const node = document.createTextNode('connected');
+            const paragraph = document.createElement('p');
+            paragraph.appendChild(node);
+
+            const body = document.querySelector('body');
+            body.appendChild(paragraph);
+
         });
 
         client.on("message", function (topic, payload) {
