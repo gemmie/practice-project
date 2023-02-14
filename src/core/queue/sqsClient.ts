@@ -12,6 +12,7 @@ const sqsConfig = config.get('sqs') as {
     accessKeyId: string;
     secretAccessKey: string;
     region: string;
+    delayNextMessageReadSeconds: number;
 };
 
 const client = new SQSClient({
@@ -31,7 +32,7 @@ export const sendMsg = async (message: InvalidateCacheMessage) => {
     console.log('SENT \n', response);
 };
 
-export const receiveMsg = async ({ handleMessage }: QMessageHandler) => {
+const consumeMsg = async ({ handleMessage }: QMessageHandler) => {
     const receiveMessageCommand = new ReceiveMessageCommand({
         QueueUrl: sqsConfig.queueUrl,
         MaxNumberOfMessages: 10,
@@ -42,20 +43,29 @@ export const receiveMsg = async ({ handleMessage }: QMessageHandler) => {
     if (response.Messages) {
         await Promise.all(
             response.Messages.map(async (message) => {
+                await deleteMsg(message.ReceiptHandle);
+
                 if (message.Body) {
                     const msg = JSON.parse(message.Body);
                     await handleMessage(msg);
                     console.log('RECEIVED \n', msg.cacheKey);
                 }
-
-                await deleteMsg(message.ReceiptHandle);
             })
         );
-
-        receiveMsg({ handleMessage });
-    } else {
-        setTimeout(() => receiveMsg({ handleMessage }), 30 * 1000);
     }
+    return response.Messages?.length;
+};
+
+export const receiveMsg = ({
+    handleMessage,
+}: QMessageHandler): (() => void) => {
+    consumeMsg({ handleMessage });
+    const intervalId = setInterval(
+        () => consumeMsg({ handleMessage }),
+        sqsConfig.delayNextMessageReadSeconds * 1000
+    );
+
+    return () => clearInterval(intervalId);
 };
 
 const deleteMsg = async (receiptHandle: any) => {

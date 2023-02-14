@@ -18,5 +18,7 @@ export const handleCacheInvalidateMsg = async (
 ) => {
     const { cacheKey } = message;
 
+    console.log('handleCacheInvalidateMsg');
+
     combinedCacheClient.del(cacheKey);
 };
